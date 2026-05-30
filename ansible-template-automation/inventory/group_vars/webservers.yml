@@ -1,0 +1,19 @@
+---
+apache_port: 80
+apache_server_admin: admin@example.com
+apache_document_root: /var/www/html
+apache_log_level: warn
+
+app_name: "Template Automation Platform"
+app_version: "1.0.0"
+app_environment: production
+enable_ssl: false
+
+security_headers:
+  - "X-Content-Type-Options: nosniff"
+  - "X-Frame-Options: DENY"
+  - "X-XSS-Protection: 1; mode=block"
+
+enabled_modules:
+  - rewrite
+  - headers

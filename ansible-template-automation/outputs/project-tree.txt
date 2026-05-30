@@ -1,0 +1,19 @@
+.
+├── ansible.cfg
+├── group_vars
+├── host_vars
+├── inventory
+│   ├── group_vars
+│   │   └── webservers.yml
+│   └── hosts.ini
+├── outputs
+│   ├── inventory-graph.txt
+│   ├── ping-test.txt
+│   └── template-deployment.txt
+├── playbooks
+│   └── deploy-templates.yml
+└── templates
+    ├── httpd.conf.j2
+    └── index.html.j2
+
+7 directories, 9 files

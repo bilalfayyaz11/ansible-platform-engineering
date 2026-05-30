@@ -1,0 +1,38 @@
+---
+- name: Deploy Jinja2 Templates
+  hosts: webservers
+  become: true
+  gather_facts: true
+
+  tasks:
+
+    - name: Install Apache
+      package:
+        name: httpd
+        state: present
+
+    - name: Ensure document root exists
+      file:
+        path: "{{ apache_document_root }}"
+        state: directory
+        mode: '0755'
+
+    - name: Deploy Apache configuration template
+      template:
+        src: ../templates/httpd.conf.j2
+        dest: /tmp/httpd.conf.generated
+
+    - name: Deploy HTML template
+      template:
+        src: ../templates/index.html.j2
+        dest: "{{ apache_document_root }}/index.html"
+
+    - name: Start Apache
+      systemd:
+        name: httpd
+        state: started
+        enabled: true
+
+    - name: Validate generated configuration
+      debug:
+        msg: "Template deployment completed successfully"

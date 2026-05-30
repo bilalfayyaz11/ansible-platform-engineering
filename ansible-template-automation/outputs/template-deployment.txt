@@ -1,0 +1,29 @@
+
+PLAY [Deploy Jinja2 Templates] *************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+
+TASK [Install Apache] **********************************************************
+ok: [localhost]
+
+TASK [Ensure document root exists] *********************************************
+ok: [localhost]
+
+TASK [Deploy Apache configuration template] ************************************
+changed: [localhost]
+
+TASK [Deploy HTML template] ****************************************************
+changed: [localhost]
+
+TASK [Start Apache] ************************************************************
+changed: [localhost]
+
+TASK [Validate generated configuration] ****************************************
+ok: [localhost] => {
+    "msg": "Template deployment completed successfully"
+}
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=7    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
