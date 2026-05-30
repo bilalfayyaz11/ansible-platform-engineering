@@ -1,0 +1,27 @@
+---
+environment_type: "production"
+monitoring_enabled: true
+logging_level: "info"
+backup_enabled: true
+
+timezone: "Asia/Karachi"
+
+ntp_servers:
+  - "pool.ntp.org"
+  - "time.google.com"
+
+security_policies:
+  password_complexity: true
+  session_timeout: 3600
+  failed_login_attempts: 3
+  account_lockout_duration: 1800
+
+monitoring:
+  agent: "node_exporter"
+  metrics_port: 9100
+  scrape_interval: "15s"
+
+log_management:
+  centralized_logging: true
+  log_retention_days: 90
+  log_rotation: "daily"

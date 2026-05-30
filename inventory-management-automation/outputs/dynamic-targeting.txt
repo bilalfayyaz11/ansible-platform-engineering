@@ -1,0 +1,45 @@
+
+PLAY [Build Dynamic Groups] ****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [prod-db1]
+ok: [prod-web1]
+ok: [prod-web3]
+ok: [prod-db2]
+ok: [prod-web2]
+ok: [prod-lb1]
+ok: [prod-lb2]
+
+TASK [Group by operating system] ***********************************************
+changed: [prod-db1]
+changed: [prod-db2]
+changed: [prod-web1]
+changed: [prod-web2]
+changed: [prod-web3]
+changed: [prod-lb1]
+changed: [prod-lb2]
+
+TASK [Group by environment] ****************************************************
+changed: [prod-db1]
+changed: [prod-db2]
+changed: [prod-web1]
+changed: [prod-web2]
+changed: [prod-web3]
+changed: [prod-lb1]
+changed: [prod-lb2]
+
+PLAY [Configure Environment Groups] ********************************************
+skipping: no hosts matched
+
+PLAY [Configure Development Groups] ********************************************
+skipping: no hosts matched
+
+PLAY RECAP *********************************************************************
+prod-db1                   : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+prod-db2                   : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+prod-lb1                   : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+prod-lb2                   : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+prod-web1                  : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+prod-web2                  : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+prod-web3                  : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

@@ -1,0 +1,31 @@
+---
+- name: Build Dynamic Groups
+  hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Group by operating system
+      group_by:
+        key: "os_{{ ansible_distribution | lower }}"
+
+    - name: Group by environment
+      group_by:
+        key: "env_{{ environment | default('unknown') }}"
+
+- name: Configure Environment Groups
+  hosts: env_production
+  gather_facts: false
+
+  tasks:
+    - name: Production group validation
+      debug:
+        msg: "Production host detected: {{ inventory_hostname }}"
+
+- name: Configure Development Groups
+  hosts: env_development
+  gather_facts: false
+
+  tasks:
+    - name: Development group validation
+      debug:
+        msg: "Development host detected: {{ inventory_hostname }}"

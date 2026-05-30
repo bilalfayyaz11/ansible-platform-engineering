@@ -1,0 +1,37 @@
+
+PLAY [Variable Precedence Demonstration] ***************************************
+
+TASK [Show variable precedence] ************************************************
+ok: [dev-web1] => {
+    "msg": "Host: dev-web1\nTest Variable: extra_var_value\nCommon Setting: from_playbook\nEnvironment: []\n"
+}
+ok: [dev-web2] => {
+    "msg": "Host: dev-web2\nTest Variable: extra_var_value\nCommon Setting: from_playbook\nEnvironment: []\n"
+}
+ok: [dev-db1] => {
+    "msg": "Host: dev-db1\nTest Variable: extra_var_value\nCommon Setting: from_playbook\nEnvironment: []\n"
+}
+ok: [dev-lb1] => {
+    "msg": "Host: dev-lb1\nTest Variable: extra_var_value\nCommon Setting: from_playbook\nEnvironment: []\n"
+}
+
+TASK [Show group membership] ***************************************************
+ok: [dev-web1] => {
+    "msg": "dev-web1 belongs to groups: ['webservers']"
+}
+ok: [dev-web2] => {
+    "msg": "dev-web2 belongs to groups: ['webservers']"
+}
+ok: [dev-db1] => {
+    "msg": "dev-db1 belongs to groups: ['databases']"
+}
+ok: [dev-lb1] => {
+    "msg": "dev-lb1 belongs to groups: ['loadbalancers']"
+}
+
+PLAY RECAP *********************************************************************
+dev-db1                    : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+dev-lb1                    : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+dev-web1                   : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+dev-web2                   : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

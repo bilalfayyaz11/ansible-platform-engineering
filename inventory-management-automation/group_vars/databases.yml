@@ -1,0 +1,27 @@
+---
+service_name: "mysqld"
+data_directory: "/tmp/mysql-data"
+log_directory: "/var/log/mysql"
+config_file: "/etc/my.cnf"
+
+required_packages:
+  - mysql-server
+  - python3-PyMySQL
+
+mysql_config:
+  bind_address: "0.0.0.0"
+  port: 3306
+  max_connections: 200
+  innodb_buffer_pool_size: "1G"
+  query_cache_size: "64M"
+
+security_config:
+  remove_anonymous_users: true
+  remove_test_database: true
+  disallow_root_login_remotely: true
+
+backup_schedule:
+  frequency: "daily"
+  retention_days: 30
+  backup_path: "/tmp/backup/mysql"
+  compress: true

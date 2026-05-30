@@ -1,0 +1,67 @@
+
+PLAY [Validate Web Server Group Configuration] *********************************
+
+TASK [Display web server configuration] ****************************************
+ok: [prod-web1] => {
+    "msg": "Host: prod-web1\nService: apache\nDocument Root: /var/www/html\nEnvironment Type: production\nHTTP Port: 80\nMax Workers: 400\nBackup Path: /tmp/backup/web\n"
+}
+ok: [prod-web2] => {
+    "msg": "Host: prod-web2\nService: apache\nDocument Root: /var/www/html\nEnvironment Type: production\nHTTP Port: 80\nMax Workers: 400\nBackup Path: /tmp/backup/web\n"
+}
+ok: [prod-web3] => {
+    "msg": "Host: prod-web3\nService: apache\nDocument Root: /var/www/html\nEnvironment Type: production\nHTTP Port: 80\nMax Workers: 400\nBackup Path: /tmp/backup/web\n"
+}
+
+TASK [Create simulated web backup directory] ***********************************
+changed: [prod-web2]
+ok: [prod-web3]
+ok: [prod-web1]
+
+PLAY [Validate Database Group Configuration] ***********************************
+
+TASK [Display database configuration] ******************************************
+ok: [prod-db1] => {
+    "msg": "Host: prod-db1\nService: mysqld\nData Directory: /tmp/mysql-data\nDB Port: 3306\nMax Connections: 200\nBackup Path: /tmp/backup/mysql\n"
+}
+ok: [prod-db2] => {
+    "msg": "Host: prod-db2\nService: mysqld\nData Directory: /tmp/mysql-data\nDB Port: 3306\nMax Connections: 200\nBackup Path: /tmp/backup/mysql\n"
+}
+
+TASK [Create simulated database backup directory] ******************************
+changed: [prod-db1]
+ok: [prod-db2]
+
+PLAY [Validate Production-Wide Configuration] **********************************
+
+TASK [Display production settings] *********************************************
+ok: [prod-db1] => {
+    "msg": "Host: prod-db1\nEnvironment Type: production\nMonitoring Enabled: True\nTimezone: Asia/Karachi\nLog Retention: 90 days\n"
+}
+ok: [prod-db2] => {
+    "msg": "Host: prod-db2\nEnvironment Type: production\nMonitoring Enabled: True\nTimezone: Asia/Karachi\nLog Retention: 90 days\n"
+}
+ok: [prod-web1] => {
+    "msg": "Host: prod-web1\nEnvironment Type: production\nMonitoring Enabled: True\nTimezone: Asia/Karachi\nLog Retention: 90 days\n"
+}
+ok: [prod-web2] => {
+    "msg": "Host: prod-web2\nEnvironment Type: production\nMonitoring Enabled: True\nTimezone: Asia/Karachi\nLog Retention: 90 days\n"
+}
+ok: [prod-web3] => {
+    "msg": "Host: prod-web3\nEnvironment Type: production\nMonitoring Enabled: True\nTimezone: Asia/Karachi\nLog Retention: 90 days\n"
+}
+ok: [prod-lb1] => {
+    "msg": "Host: prod-lb1\nEnvironment Type: production\nMonitoring Enabled: True\nTimezone: Asia/Karachi\nLog Retention: 90 days\n"
+}
+ok: [prod-lb2] => {
+    "msg": "Host: prod-lb2\nEnvironment Type: production\nMonitoring Enabled: True\nTimezone: Asia/Karachi\nLog Retention: 90 days\n"
+}
+
+PLAY RECAP *********************************************************************
+prod-db1                   : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+prod-db2                   : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+prod-lb1                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+prod-lb2                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+prod-web1                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+prod-web2                  : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+prod-web3                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

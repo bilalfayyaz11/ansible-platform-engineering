@@ -1,0 +1,13 @@
+@all:
+  |--@ungrouped:
+  |--@production:
+  |  |--@frontend:
+  |  |  |--@webservers:
+  |  |  |  |--web1
+  |  |  |  |--web2
+  |  |  |--@loadbalancers:
+  |  |  |  |--lb1
+  |  |--@backend:
+  |  |  |--@databases:
+  |  |  |  |--db1
+  |  |  |  |--db2

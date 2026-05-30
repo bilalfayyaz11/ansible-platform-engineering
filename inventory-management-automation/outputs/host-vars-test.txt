@@ -1,0 +1,40 @@
+
+PLAY [Test Host Variables] *****************************************************
+
+TASK [Display environment information] *****************************************
+ok: [dev-web1] => {
+    "msg": "Host: dev-web1\nEnvironment: []\nHTTP Port: 8080\nDebug Mode: true\nServer Role: primary_web\nCPU Cores: 2\nMemory: 4GB\n"
+}
+
+TASK [Display custom configuration] ********************************************
+ok: [dev-web1] => {
+    "custom_config": {
+        "cache_size": "128M",
+        "session_timeout": 1800,
+        "upload_max_size": "10M"
+    }
+}
+
+PLAY RECAP *********************************************************************
+dev-web1                   : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+
+PLAY [Test Host Variables] *****************************************************
+
+TASK [Display environment information] *****************************************
+ok: [prod-web1] => {
+    "msg": "Host: prod-web1\nEnvironment: []\nHTTP Port: 80\nDebug Mode: false\nServer Role: primary_web\nCPU Cores: 8\nMemory: 16GB\n"
+}
+
+TASK [Display custom configuration] ********************************************
+ok: [prod-web1] => {
+    "custom_config": {
+        "cache_size": "512M",
+        "session_timeout": 3600,
+        "upload_max_size": "50M"
+    }
+}
+
+PLAY RECAP *********************************************************************
+prod-web1                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

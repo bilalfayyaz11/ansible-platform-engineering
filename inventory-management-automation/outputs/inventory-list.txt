@@ -1,0 +1,61 @@
+{
+    "_meta": {
+        "hostvars": {
+            "db1": {
+                "ansible_connection": "local"
+            },
+            "db2": {
+                "ansible_connection": "local"
+            },
+            "lb1": {
+                "ansible_connection": "local"
+            },
+            "web1": {
+                "ansible_connection": "local"
+            },
+            "web2": {
+                "ansible_connection": "local"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "production"
+        ]
+    },
+    "backend": {
+        "children": [
+            "databases"
+        ]
+    },
+    "databases": {
+        "hosts": [
+            "db1",
+            "db2"
+        ]
+    },
+    "frontend": {
+        "children": [
+            "webservers",
+            "loadbalancers"
+        ]
+    },
+    "loadbalancers": {
+        "hosts": [
+            "lb1"
+        ]
+    },
+    "production": {
+        "children": [
+            "frontend",
+            "backend"
+        ]
+    },
+    "webservers": {
+        "hosts": [
+            "web1",
+            "web2"
+        ]
+    }
+}

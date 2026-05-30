@@ -1,0 +1,57 @@
+---
+- name: Validate Web Server Group Configuration
+  hosts: webservers
+  become: false
+  gather_facts: false
+  tasks:
+    - name: Display web server configuration
+      debug:
+        msg: |
+          Host: {{ inventory_hostname }}
+          Service: {{ service_name }}
+          Document Root: {{ document_root }}
+          Environment Type: {{ environment_type | default('development') }}
+          HTTP Port: {{ http_port }}
+          Max Workers: {{ performance_settings.max_request_workers }}
+          Backup Path: {{ backup_schedule.backup_path }}
+
+    - name: Create simulated web backup directory
+      file:
+        path: "{{ backup_schedule.backup_path }}"
+        state: directory
+        mode: '0750'
+
+- name: Validate Database Group Configuration
+  hosts: databases
+  become: false
+  gather_facts: false
+  tasks:
+    - name: Display database configuration
+      debug:
+        msg: |
+          Host: {{ inventory_hostname }}
+          Service: {{ service_name }}
+          Data Directory: {{ data_directory }}
+          DB Port: {{ mysql_config.port }}
+          Max Connections: {{ mysql_config.max_connections }}
+          Backup Path: {{ backup_schedule.backup_path }}
+
+    - name: Create simulated database backup directory
+      file:
+        path: "{{ backup_schedule.backup_path }}"
+        state: directory
+        mode: '0750'
+
+- name: Validate Production-Wide Configuration
+  hosts: production
+  become: false
+  gather_facts: false
+  tasks:
+    - name: Display production settings
+      debug:
+        msg: |
+          Host: {{ inventory_hostname }}
+          Environment Type: {{ environment_type }}
+          Monitoring Enabled: {{ monitoring_enabled }}
+          Timezone: {{ timezone }}
+          Log Retention: {{ log_management.log_retention_days }} days

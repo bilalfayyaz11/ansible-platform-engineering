@@ -1,0 +1,21 @@
+---
+- name: Variable Precedence Demonstration
+  hosts: all
+  gather_facts: false
+
+  vars:
+    test_variable: "playbook_value"
+    common_setting: "from_playbook"
+
+  tasks:
+    - name: Show variable precedence
+      debug:
+        msg: |
+          Host: {{ inventory_hostname }}
+          Test Variable: {{ test_variable }}
+          Common Setting: {{ common_setting }}
+          Environment: {{ environment | default('not_defined') }}
+
+    - name: Show group membership
+      debug:
+        msg: "{{ inventory_hostname }} belongs to groups: {{ group_names }}"
