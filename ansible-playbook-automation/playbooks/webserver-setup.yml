@@ -1,0 +1,84 @@
+---
+- name: Install and Configure Apache Web Server
+  hosts: webservers
+  become: yes
+
+  vars:
+    http_port: 80
+    max_clients: 200
+    document_root: /var/www/html
+
+  tasks:
+    - name: Install Apache HTTP Server
+      ansible.builtin.dnf:
+        name: httpd
+        state: present
+      tags:
+        - packages
+        - apache
+
+    - name: Install additional packages
+      ansible.builtin.dnf:
+        name:
+          - wget
+          - curl
+          - vim
+        state: present
+      tags:
+        - packages
+
+    - name: Ensure Apache document root exists
+      ansible.builtin.file:
+        path: "{{ document_root }}"
+        state: directory
+        owner: apache
+        group: apache
+        mode: '0755'
+      tags:
+        - content
+
+    - name: Create custom index.html
+      ansible.builtin.copy:
+        content: |
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>Welcome to {{ inventory_hostname }}</title>
+          </head>
+          <body>
+              <h1>Hello from {{ inventory_hostname }}</h1>
+              <p>This server was configured by Ansible.</p>
+              <p>Configured on: {{ ansible_date_time.date }}</p>
+          </body>
+          </html>
+        dest: "{{ document_root }}/index.html"
+        owner: apache
+        group: apache
+        mode: '0644'
+      tags:
+        - content
+
+    - name: Configure Apache listen port
+      ansible.builtin.lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^Listen '
+        line: "Listen {{ http_port }}"
+        backup: yes
+      notify:
+        - restart apache
+      tags:
+        - configuration
+
+    - name: Ensure Apache is started and enabled
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: yes
+      tags:
+        - services
+
+  handlers:
+    - name: restart apache
+      ansible.builtin.service:
+        name: httpd
+        state: restarted

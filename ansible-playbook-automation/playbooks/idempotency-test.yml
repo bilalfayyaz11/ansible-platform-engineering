@@ -1,0 +1,37 @@
+---
+- name: Idempotency Testing Examples
+  hosts: webservers
+  become: yes
+
+  tasks:
+    - name: Bad example - always runs
+      ansible.builtin.shell: 'echo "Current time: $(date)" >> /tmp/timestamps.log'
+      tags:
+        - bad-example
+
+    - name: Good example - managed file
+      ansible.builtin.copy:
+        content: "This file was created by Ansible\n"
+        dest: /tmp/ansible-managed.txt
+        owner: root
+        group: root
+        mode: '0644'
+      tags:
+        - good-example
+
+    - name: Good example - managed directory
+      ansible.builtin.file:
+        path: /opt/myapp
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+      tags:
+        - good-example
+
+    - name: Good example - create once
+      ansible.builtin.shell: 'echo "First run" > /tmp/first-run.txt'
+      args:
+        creates: /tmp/first-run.txt
+      tags:
+        - good-example
