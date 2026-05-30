@@ -1,0 +1,34 @@
+---
+- name: Automate Software Package Management
+  hosts: managed
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Update DNF package cache
+      dnf:
+        update_cache: true
+      when: ansible_os_family == "RedHat"
+
+    - name: Install common packages
+      dnf:
+        name: "{{ common_packages }}"
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Remove unwanted packages
+      dnf:
+        name: "{{ packages_to_remove }}"
+        state: absent
+      when: ansible_os_family == "RedHat"
+
+    - name: Verify common packages are installed
+      command: "rpm -q {{ item }}"
+      loop: "{{ common_packages }}"
+      register: common_package_check
+      changed_when: false
+
+    - name: Display package verification results
+      debug:
+        msg: "{{ item.item }} => {{ item.stdout }}"
+      loop: "{{ common_package_check.results }}"

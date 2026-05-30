@@ -1,0 +1,17 @@
+.
+├── ansible.cfg
+├── group_vars
+├── inventory
+│   ├── group_vars
+│   │   └── all.yml
+│   └── hosts.ini
+├── outputs
+│   ├── inventory-graph.txt
+│   ├── package-management.txt
+│   ├── ping-test.txt
+│   └── web-package-management.txt
+└── playbooks
+    ├── package-management.yml
+    └── web-package-management.yml
+
+5 directories, 9 files

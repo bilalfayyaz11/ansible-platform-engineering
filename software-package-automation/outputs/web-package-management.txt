@@ -1,0 +1,26 @@
+
+PLAY [Automate Web Server Package Installation] ********************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+
+TASK [Install web server packages] *********************************************
+changed: [localhost]
+
+TASK [Start and enable Apache service] *****************************************
+changed: [localhost]
+
+TASK [Create package automation test page] *************************************
+changed: [localhost]
+
+TASK [Verify Apache package installation] **************************************
+ok: [localhost]
+
+TASK [Display Apache package version] ******************************************
+ok: [localhost] => {
+    "msg": "httpd-2.4.62-13.el9.x86_64"
+}
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

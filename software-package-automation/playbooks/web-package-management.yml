@@ -1,0 +1,44 @@
+---
+- name: Automate Web Server Package Installation
+  hosts: webservers
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Install web server packages
+      dnf:
+        name: "{{ web_packages }}"
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Start and enable Apache service
+      systemd:
+        name: httpd
+        state: started
+        enabled: true
+
+    - name: Create package automation test page
+      copy:
+        content: |
+          <html>
+          <head><title>Software Package Automation</title></head>
+          <body>
+          <h1>Software Package Automation Complete</h1>
+          <p>Apache installed and started using Ansible package automation.</p>
+          <p>Managed Host: {{ inventory_hostname }}</p>
+          <p>Operating System: {{ ansible_distribution }} {{ ansible_distribution_version }}</p>
+          </body>
+          </html>
+        dest: /var/www/html/index.html
+        owner: apache
+        group: apache
+        mode: '0644'
+
+    - name: Verify Apache package installation
+      command: rpm -q httpd
+      register: httpd_package
+      changed_when: false
+
+    - name: Display Apache package version
+      debug:
+        msg: "{{ httpd_package.stdout }}"

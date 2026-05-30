@@ -1,0 +1,14 @@
+---
+common_packages:
+  - vim
+  - curl
+  - wget
+  - git
+  - tree
+
+web_packages:
+  - httpd
+  - mod_ssl
+
+packages_to_remove:
+  - sendmail

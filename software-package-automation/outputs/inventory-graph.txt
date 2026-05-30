@@ -1,0 +1,6 @@
+@all:
+  |--@ungrouped:
+  |--@managed:
+  |  |--localhost
+  |--@webservers:
+  |  |--localhost
