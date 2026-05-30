@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Role-Based Web Server Deployment</title>
+</head>
+<body>
+    <h1>Web Server Successfully Deployed</h1>
+    <p><strong>Hostname:</strong> {{ ansible_hostname }}</p>
+    <p><strong>Operating System:</strong> {{ ansible_distribution }} {{ ansible_distribution_version }}</p>
+    <p><strong>Web Server:</strong> {{ webserver_package }}</p>
+    <p><strong>Port:</strong> {{ webserver_port }}</p>
+    <p><strong>Document Root:</strong> {{ webserver_document_root }}</p>
+    <p><strong>Deployed by:</strong> Ansible Role</p>
+</body>
+</html>

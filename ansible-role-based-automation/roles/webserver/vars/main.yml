@@ -1,0 +1,4 @@
+---
+webserver_config_file: /etc/httpd/conf/httpd.conf
+webserver_log_dir: /var/log/httpd
+firewall_service: firewalld

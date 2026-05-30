@@ -1,0 +1,49 @@
+.
+├── ansible.cfg
+├── inventory
+│   └── hosts.ini
+├── outputs
+│   ├── inventory-graph.txt
+│   ├── ping-test.txt
+│   ├── role-dependency-test.txt
+│   └── webserver-role-deployment.txt
+├── playbooks
+│   └── deploy-webserver.yml
+└── roles
+    ├── common
+    │   ├── README.md
+    │   ├── defaults
+    │   │   └── main.yml
+    │   ├── files
+    │   ├── handlers
+    │   │   └── main.yml
+    │   ├── meta
+    │   │   └── main.yml
+    │   ├── tasks
+    │   │   └── main.yml
+    │   ├── templates
+    │   ├── tests
+    │   │   ├── inventory
+    │   │   └── test.yml
+    │   └── vars
+    │       └── main.yml
+    └── webserver
+        ├── README.md
+        ├── defaults
+        │   └── main.yml
+        ├── files
+        ├── handlers
+        │   └── main.yml
+        ├── meta
+        │   └── main.yml
+        ├── tasks
+        │   └── main.yml
+        ├── templates
+        │   └── index.html.j2
+        ├── tests
+        │   ├── inventory
+        │   └── test.yml
+        └── vars
+            └── main.yml
+
+22 directories, 24 files

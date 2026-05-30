@@ -1,0 +1,35 @@
+
+PLAY [Deploy Web Server Using Custom Role] *************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+
+TASK [webserver : Install web server and firewall packages] ********************
+ok: [localhost]
+
+TASK [webserver : Ensure document root exists] *********************************
+ok: [localhost]
+
+TASK [webserver : Deploy index page from template] *****************************
+ok: [localhost]
+
+TASK [webserver : Start and enable firewall] ***********************************
+ok: [localhost]
+
+TASK [webserver : Open web server port] ****************************************
+ok: [localhost]
+
+TASK [webserver : Start and enable web server] *********************************
+ok: [localhost]
+
+TASK [Verify web server responds locally] **************************************
+ok: [localhost]
+
+TASK [Display deployment result] ***********************************************
+ok: [localhost] => {
+    "msg": "Web server role deployed successfully. HTTP status: 200"
+}
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=9    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

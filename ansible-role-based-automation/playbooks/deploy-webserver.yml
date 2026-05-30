@@ -1,0 +1,20 @@
+---
+- name: Deploy Web Server Using Custom Role
+  hosts: webservers
+  become: true
+  gather_facts: true
+
+  roles:
+    - webserver
+
+  post_tasks:
+    - name: Verify web server responds locally
+      uri:
+        url: "http://localhost:{{ webserver_port }}"
+        method: GET
+        status_code: 200
+      register: web_check
+
+    - name: Display deployment result
+      debug:
+        msg: "Web server role deployed successfully. HTTP status: {{ web_check.status }}"
